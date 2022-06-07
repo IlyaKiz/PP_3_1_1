@@ -21,7 +21,6 @@ public class UserController {
 
     @GetMapping(value = "/users")
     public String index(Model model) {
-
         List<User> users = userRepository.findAll();
         model.addAttribute("users", users);
         return "users";
