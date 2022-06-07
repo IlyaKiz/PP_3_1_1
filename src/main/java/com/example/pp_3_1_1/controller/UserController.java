@@ -4,10 +4,7 @@ import com.example.pp_3_1_1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -22,12 +19,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/index")
+    @GetMapping(value = "/users")
     public String index(Model model) {
 
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        return "index";
+        return "users";
     }
 
     @GetMapping("/new")
@@ -39,10 +36,10 @@ public class UserController {
     @PostMapping()
     public String createUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
-        return "redirect:/index";
+        return "redirect:/users";
     }
 
-    @GetMapping("index/{id}/edit")
+    @GetMapping("users/{id}/edit")
     public String showEditForm(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.getUserById(id));
         return "edit";
@@ -51,13 +48,13 @@ public class UserController {
     @PostMapping("/{id}")
     public String update(@ModelAttribute("user") User user) {
         userService.updateUser(user);
-        return "redirect:/index";
+        return "redirect:/users";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:/index";
+        return "redirect:/users";
     }
 
 }
