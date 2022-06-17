@@ -1,11 +1,9 @@
 package com.example.pp_3_1_1.dao;
 import com.example.pp_3_1_1.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
-    List<User> findAllByFirstName(String firstName);
 
 }

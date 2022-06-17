@@ -20,9 +20,8 @@ public class UserController {
     }
 
     @GetMapping(value = "/users")
-    public String index(Model model) {
-        List<User> users = userRepository.findAll();
-        model.addAttribute("users", users);
+    public String allUsers(Model model) {
+        model.addAttribute("users", userRepository.findAll());
         return "users";
     }
 
@@ -32,15 +31,15 @@ public class UserController {
         return "new";
     }
 
-    @PostMapping()
+    @PostMapping("/addUser")
     public String createUser(@ModelAttribute("user") User user) {
         userRepository.save(user);
         return "redirect:/users";
     }
 
-    @GetMapping("users/{id}/edit")
-    public String showEditForm(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userRepository.findById(id));
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("user", userRepository.findById(id).get());
         return "edit";
     }
 
@@ -55,5 +54,7 @@ public class UserController {
         userRepository.deleteById(id);
         return "redirect:/users";
     }
+
+
 
 }
