@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form th:method="PUT" th:action="@{/{id}(id=${user.id})}" th:object="${user}">
+<form th:method="POST" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}">
 
     <label for="firstName">Enter firstName</label>
     <input type="text" th:field="${user.firstName}" id="firstName"/>
