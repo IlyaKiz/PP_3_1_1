@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -16,25 +16,25 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Transactional
+
     @Override
     public void saveUser(User user) {
         userRepository.save(user);
     }
 
-    @Transactional(readOnly = true)
+
     @Override
     public List<User> listUsers() {
         return userRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
+
     @Override
     public User getUserById(long id) {
         return userRepository.findById(id).get();
     }
 
-    @Transactional
+
     @Override
     public void deleteUserById(long id) {
         userRepository.deleteById(id);
